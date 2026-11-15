@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { profile, sections, type SectionId } from "@/data/profile";
 import { useModKey } from "@/lib/hooks";
 import { SearchIcon, TerminalIcon } from "./icons";
+import { selectIntent } from "./contact-intent";
 import { useUI } from "./ui-provider";
 
 function useActiveSection() {
@@ -77,7 +78,8 @@ export function Nav() {
       <header className="site-nav fixed top-0 right-0 left-0 z-[100]">
         <div className="flex max-w-full min-w-0 items-center justify-between gap-3 px-4 py-5 sm:px-6 md:px-12 md:py-6 lg:px-20">
           <a href="#top" className="text-mono text-xs tracking-[0.2em] text-paper uppercase transition-colors hover:text-accent">
-            {profile.name}
+            <span className="sm:hidden">{profile.initials}</span>
+            <span className="hidden sm:inline">{profile.name}</span>
           </a>
           <nav aria-label="Sections" className="hidden items-center gap-8 md:flex">
             {sections.map((s) => (
@@ -107,8 +109,14 @@ export function Nav() {
             <button type="button" onClick={openTerminal} aria-label="Open terminal mode" className="nav-pill hidden sm:inline-flex">
               <TerminalIcon width={13} height={13} />
             </button>
-            <a href={profile.resume} target="_blank" rel="noreferrer" className="nav-pill">
+            <a href={profile.resume} target="_blank" rel="noreferrer" className="nav-pill hidden sm:inline-flex">
               Resume
+            </a>
+            <button type="button" onClick={() => selectIntent("project")} className="nav-pill hidden border-accent/50 text-paper sm:inline-flex">
+              Start a project
+            </button>
+            <a href="#contact" className="nav-pill border-accent/50 text-paper sm:hidden">
+              Contact
             </a>
           </div>
         </div>

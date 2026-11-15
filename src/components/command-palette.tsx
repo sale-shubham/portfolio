@@ -1,9 +1,12 @@
 "use client";
 
 import { useId, useMemo, useRef, useState, type ReactNode } from "react";
-import { profile, projects, sections } from "@/data/profile";
+import { DEFAULT_WHATSAPP_TEXT, profile, projects, sections, services, whatsappLink } from "@/data/profile";
 import { copyEmail, openExternal, scrollToSection } from "@/lib/actions";
+import { selectIntent } from "./contact-intent";
+import { selectService } from "./service-button";
 import {
+  WhatsAppIcon,
   ArrowIcon,
   BoxIcon,
   CopyIcon,
@@ -18,7 +21,7 @@ import { useDialogFocus } from "./use-dialog-focus";
 
 type Command = {
   id: string;
-  group: "Go to" | "Projects" | "Actions" |"Links";
+  group: "Go to" | "Services" | "Projects" | "Actions" | "Links";
   label: string;
   keywords?: string;
   icon: ReactNode;
@@ -61,13 +64,45 @@ export function CommandPalette({ onClose, onOpenTerminal, onOpenProject, onNotif
         run: () => onOpenProject(p.slug),
         replaces: true,
       })),
+      ...services.map((s) => ({
+        id: `service-${s.id}`,
+        group: "Services" as const,
+        label: s.title,
+        keywords: `${s.deliverables.join(" ")} hire enquire`,
+        icon: <ArrowIcon />,
+        run: () => selectService(s.id),
+      })),
       {
         id: "resume",
         group: "Actions",
-        label: "Download resume (PDF)",
+        label: "View resume",
         keywords: "cv pdf",
         icon: <DownloadIcon />,
         run: () => openExternal(profile.resume),
+      },
+      {
+        id: "job-enquiry",
+        group: "Actions",
+        label: "Job enquiry",
+        keywords: "hire hiring recruiter job role position contact",
+        icon: <ArrowIcon />,
+        run: () => selectIntent("job"),
+      },
+      {
+        id: "start-project",
+        group: "Actions",
+        label: "Start a project",
+        keywords: "freelance enquire contact quote",
+        icon: <ArrowIcon />,
+        run: () => selectIntent("project"),
+      },
+      {
+        id: "whatsapp",
+        group: "Actions",
+        label: "Chat on WhatsApp",
+        keywords: "message contact hire",
+        icon: <WhatsAppIcon />,
+        run: () => openExternal(whatsappLink(DEFAULT_WHATSAPP_TEXT)),
       },
       {
         id: "copy-email",
@@ -93,7 +128,7 @@ export function CommandPalette({ onClose, onOpenTerminal, onOpenProject, onNotif
         id: "email",
         group: "Links",
         label: "Send an email",
-        keywords: "contact mail hire",
+        keywords: "contact mail hire enquire",
         icon: <MailIcon />,
         run: () => {
           window.location.href = `mailto:${profile.email}`;
@@ -174,8 +209,8 @@ export function CommandPalette({ onClose, onOpenTerminal, onOpenProject, onNotif
             aria-expanded="true"
             aria-controls={listId}
             aria-activedescendant={results[activeIndex] ? `${listId}-${results[activeIndex].id}` : undefined}
-            aria-label="Search sections, projects and actions"
-            placeholder="Search sections, projects and actions"
+            aria-label="Search sections, services, projects and actions"
+            placeholder="Search sections, services, projects and actions"
             className="h-14 w-full bg-transparent text-[16px] text-paper placeholder:text-muted focus:outline-none"
             autoComplete="off"
             spellCheck={false}
@@ -186,7 +221,7 @@ export function CommandPalette({ onClose, onOpenTerminal, onOpenProject, onNotif
         <ul id={listId} role="listbox" aria-label="Commands" className="max-h-[min(420px,60vh)] overflow-y-auto p-2">
           {results.length === 0 && (
             <li className="px-3 py-6 text-center text-[15px] text-muted">
-              Nothing matches “{query}”. Try a section name, a project, or “resume”.
+              Nothing matches “{query}”. Try a section name, a service, or a project.
             </li>
           )}
           {results.map((command, index) => {

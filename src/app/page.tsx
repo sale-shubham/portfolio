@@ -3,8 +3,9 @@ import path from "node:path";
 import { Intro } from "@/components/intro";
 import { Nav } from "@/components/nav";
 import { RevealOnScroll } from "@/components/reveal";
-import { About, Capabilities, Contact, Footer, Hero, Journey } from "@/components/sections";
+import { About, Contact, Experience, Footer, Hero, Services } from "@/components/sections";
 import { UIProvider } from "@/components/ui-provider";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 import { Work } from "@/components/work";
 import { profile, skills } from "@/data/profile";
 
@@ -22,6 +23,7 @@ const jsonLd = {
   name: profile.name,
   jobTitle: "Full Stack Developer",
   email: `mailto:${profile.email}`,
+  telephone: `+${profile.whatsapp}`,
   address: { "@type": "PostalAddress", addressLocality: "Nashik", addressRegion: "Maharashtra", addressCountry: "IN" },
   worksFor: { "@type": "Organization", name: "AI Alpha Tech Pvt. Ltd." },
   sameAs: [profile.github, profile.linkedin],
@@ -44,13 +46,14 @@ export default function Home() {
         <Nav />
         <main id="main" tabIndex={-1}>
           <Hero photo={photo} />
-          <About />
           <Work />
-          <Capabilities />
-          <Journey />
+          <Experience />
+          <Services />
+          <About />
           <Contact />
         </main>
         <Footer />
+        <WhatsAppButton />
         <div className="grain" aria-hidden="true" />
         <RevealOnScroll />
       </UIProvider>

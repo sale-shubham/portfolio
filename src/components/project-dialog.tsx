@@ -41,6 +41,9 @@ export function ProjectDialog({ project, onClose }: { project: Project; onClose:
           <h2 id="project-dialog-title" className="text-display mt-3 text-4xl leading-[1.05] text-paper md:text-6xl">
             {project.name}
           </h2>
+          <p className="text-mono mt-4 text-[11px] tracking-wide text-muted">
+            {project.credit}, as {project.role.toLowerCase()}
+          </p>
           <p className="mt-5 max-w-[60ch] text-lg leading-relaxed text-muted">{project.summary}</p>
 
           <figure className="flow-host flow-live mt-10 rounded-xl border border-line bg-ink/60 p-5 md:p-8">
@@ -50,7 +53,7 @@ export function ProjectDialog({ project, onClose }: { project: Project; onClose:
 
           <div className="mt-12 grid gap-10 md:grid-cols-12 md:gap-8">
             <div className="md:col-span-8">
-              <h3 className="text-mono text-[10px] tracking-[0.3em] text-muted uppercase">What I built</h3>
+              <h3 className="text-mono text-[10px] tracking-[0.3em] text-muted uppercase">What it does</h3>
               <ul className="dash-list mt-5">
                 {project.points.map((p) => (
                   <li key={p}>{p}</li>
@@ -70,7 +73,7 @@ export function ProjectDialog({ project, onClose }: { project: Project; onClose:
           </div>
 
           <p className="mt-12 border-t border-line pt-6 text-sm text-muted">
-            Client project. The code and screens are private, so the diagram above shows how the pieces fit together.
+            Client project built at AI Alpha Tech. Shown with credit to the company; code is private.
           </p>
         </div>
       </div>

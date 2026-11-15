@@ -261,6 +261,15 @@ body {
   outline: none;
   border-color: var(--accent);
 }
+/* Dropdowns use the dark colour scheme so the open list stays readable */
+select.form-field {
+  color-scheme: dark;
+  cursor: pointer;
+}
+select.form-field option {
+  background: var(--surface);
+  color: var(--paper);
+}
 .form-field[aria-invalid="true"] {
   border-color: var(--danger);
 }

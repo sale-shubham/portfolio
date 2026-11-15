@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { journey, profile, projects, sections, skills } from "@/data/profile";
+import { DEFAULT_WHATSAPP_TEXT, journey, profile, projects, sections, services, skills, whatsappLink } from "@/data/profile";
 import { copyEmail, openExternal, scrollToSection } from "@/lib/actions";
 import { useDialogFocus } from "./use-dialog-focus";
 
@@ -12,14 +12,17 @@ const PROMPT = "shubham@portfolio:~$";
 const HELP: [string, string][] = [
   ["whoami", "Who I am, in one line"],
   ["about", "A short introduction"],
+  ["services", "What I can build for you"],
   ["experience", "Where I work and what I do there"],
-  ["projects", "List my main projects"],
+  ["projects", "List the systems I've built"],
   ["project <name>", "Details for one project, e.g. project cms"],
   ["open <name>", "Open a project's case study on the page"],
   ["skills", "Languages, frameworks, databases and tools"],
   ["education", "Degrees"],
-  ["contact", "Email, LinkedIn and GitHub"],
-  ["resume", "Open my resume (PDF)"],
+  ["contact", "WhatsApp, email, LinkedIn and GitHub"],
+  ["hire", "How to reach me about a role or a project"],
+  ["whatsapp", "Open a WhatsApp chat with me"],
+  ["resume", "Open my resume"],
   ["email", "Copy my email address"],
   ["goto <section>", "Close the terminal and jump to a section"],
   ["ls", "List everything you can read with cat"],
@@ -36,8 +39,8 @@ const FILES: Record<string, string> = {
 };
 
 const COMMAND_NAMES = [
-  "help", "whoami", "about", "experience", "projects", "project", "open", "skills", "education",
-  "contact", "resume", "email", "github", "linkedin", "goto", "ls", "cat", "clear", "exit",
+  "help", "whoami", "about", "services", "experience", "projects", "project", "open", "skills", "education",
+  "contact", "hire", "whatsapp", "resume", "email", "github", "linkedin", "goto", "ls", "cat", "clear", "exit",
   "history", "date", "echo",
 ];
 
@@ -223,10 +226,55 @@ export function Terminal({ onClose, onOpenProject }: Props) {
             ))}
           </div>,
         );
+      case "services":
+        return print(
+          echo,
+          <div>
+            <div className="grid grid-cols-[minmax(0,auto)_1fr] gap-x-6 gap-y-0.5">
+              {services.map((s) => (
+                <div key={s.id} className="contents">
+                  <Cmd>{s.id}</Cmd>
+                  <span>{s.title}</span>
+                </div>
+              ))}
+            </div>
+            <div className="term-muted mt-2">
+              Type <Cmd>goto contact</Cmd> to start a project.
+            </div>
+          </div>,
+        );
+      case "hire":
+        return print(
+          echo,
+          <div className="space-y-3">
+            <div>
+              <Heading>Role enquiries</Heading>
+              <div>
+                Email <a className="term-link" href={`mailto:${profile.email}`}>{profile.email}</a> or message {profile.whatsappDisplay} on WhatsApp.
+              </div>
+              <div className="term-muted">
+                Type <Cmd>resume</Cmd> to open my resume, or <Cmd>experience</Cmd> to read it here.
+              </div>
+            </div>
+            <div>
+              <Heading>Projects</Heading>
+              <div className="term-muted">
+                Type <Cmd>services</Cmd> to see what I build, then <Cmd>goto contact</Cmd> to fill in the enquiry form.
+              </div>
+            </div>
+          </div>,
+        );
+      case "whatsapp":
+        openExternal(whatsappLink(DEFAULT_WHATSAPP_TEXT));
+        return print(echo, <div>Opening WhatsApp in a new tab.</div>);
       case "contact":
         return print(
           echo,
           <div className="grid grid-cols-[minmax(0,auto)_1fr] gap-x-6 gap-y-0.5">
+            <span className="term-heading">WhatsApp</span>
+            <a className="term-link" href={whatsappLink(DEFAULT_WHATSAPP_TEXT)} target="_blank" rel="noreferrer">
+              {profile.whatsappDisplay}
+            </a>
             <span className="term-heading">Email</span>
             <a className="term-link" href={`mailto:${profile.email}`}>{profile.email}</a>
             <span className="term-heading">LinkedIn</span>

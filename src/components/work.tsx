@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { profile, projects, type Project } from "@/data/profile";
 import { useIsDesktop, useReducedMotion } from "@/lib/hooks";
+import { selectIntent } from "./contact-intent";
 import { FlowSvg } from "./flow-diagram";
 import { useUI } from "./ui-provider";
 
@@ -21,6 +22,7 @@ function CardText({ project, onOpen }: { project: Project; onOpen: () => void })
         </button>
       </h3>
       <p className="mt-2 text-sm leading-relaxed text-muted">{project.tagline}</p>
+      <p className="text-mono mt-3 text-[10px] tracking-widest text-muted uppercase">{project.credit}</p>
     </>
   );
 }
@@ -38,7 +40,7 @@ function WideCard({ project, index, onOpen }: { project: Project; index: number;
               Read case study
             </span>
           </div>
-          <div className="flex flex-1 items-center pb-[30%]">
+          <div className="flex flex-1 items-center pb-[36%]">
             <FlowSvg flow={project.flow} dir="h" id={`card-${project.slug}`} label={project.flowLabel} className="w-full" />
           </div>
         </div>
@@ -67,16 +69,16 @@ function NarrowCard({ project, onOpen }: { project: Project; onOpen: () => void 
 function EndCard() {
   return (
     <div className="work-card-end flex shrink-0 flex-col justify-between rounded-lg border border-dashed border-line p-8">
-      <p className="text-mono text-[10px] tracking-[0.3em] text-muted uppercase">More detail</p>
+      <p className="text-mono text-[10px] tracking-[0.3em] text-muted uppercase">Next step</p>
       <div>
-        <p className="text-display text-3xl leading-tight text-paper">The full story is in my resume.</p>
+        <p className="text-display text-3xl leading-tight text-paper">Want to work together?</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a href={profile.resume} target="_blank" rel="noreferrer" className="btn-accent">
-            Resume
+            View resume
           </a>
-          <a href="#contact" className="btn-outline">
-            Get in touch
-          </a>
+          <button type="button" onClick={() => selectIntent("project")} className="btn-outline">
+            Start a project
+          </button>
         </div>
       </div>
     </div>
@@ -160,13 +162,13 @@ export function Work() {
         <div className="px-6 pt-24 md:px-12 md:pt-[max(6rem,13vh)] lg:px-20">
           <div className="mx-auto mb-8 flex max-w-site min-w-0 flex-col justify-between gap-6 md:mb-10 md:flex-row md:items-end">
             <div data-reveal>
-              <p className="label">02 - Selected work</p>
+              <p className="label">01 - Selected work</p>
               <h2 id="work-title" className="text-display mt-4 text-4xl break-words text-paper md:text-6xl">
-                Case studies
+                Systems I&apos;ve built
               </h2>
             </div>
             <p className="text-mono max-w-xs text-[11px] leading-relaxed tracking-wide text-muted md:text-right" data-reveal>
-              Client systems with private code. Each card maps how the system works. Open one for the full story.
+              Built at AI Alpha Tech for its clients. Open a case study to see how each one works.
             </p>
           </div>
         </div>

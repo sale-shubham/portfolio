@@ -1,9 +1,12 @@
 import Image from "next/image";
-import { capabilities, journey, profile, skills } from "@/data/profile";
+import { DEFAULT_WHATSAPP_TEXT, journey, processSteps, profile, services, skills, whatsappLink } from "@/data/profile";
 import { ContactForm } from "./contact-form";
+import { HeroPaths } from "./path-links";
+import { ServiceButton } from "./service-button";
 
 const pad = "px-6 md:px-12 lg:px-20";
 const sectionBase = `${pad} py-24 md:py-32 lg:py-40 border-t border-line scroll-mt-16`;
+const contactLink = "link-underline text-muted transition-colors hover:text-accent";
 
 export function Hero({ photo }: { photo: string | null }) {
   return (
@@ -24,17 +27,12 @@ export function Hero({ photo }: { photo: string | null }) {
           <p data-hero-animate style={{ "--i": 2 } as React.CSSProperties} className="mt-8 max-w-prose text-lg leading-relaxed text-muted md:text-xl">
             {profile.intro}
           </p>
-          <div data-hero-animate style={{ "--i": 3 } as React.CSSProperties} className="mt-12 flex flex-wrap gap-4">
-            <a href="#work" className="btn-accent">
-              View work
-            </a>
-            <a href="#contact" className="btn-outline">
-              Get in touch
-            </a>
+          <div data-hero-animate style={{ "--i": 3 } as React.CSSProperties} className="mt-12">
+            <HeroPaths />
           </div>
-          <p data-hero-animate style={{ "--i": 4 } as React.CSSProperties} className="text-mono mt-10 flex items-center gap-3 text-[11px] tracking-wide text-muted">
-            <span className="status-dot" aria-hidden="true" />
-            {profile.status} Based in {profile.location}.
+          <p data-hero-animate style={{ "--i": 4 } as React.CSSProperties} className="text-mono mt-10 flex items-center gap-3 text-[11px] leading-relaxed tracking-wide text-muted">
+            <span className="status-dot shrink-0" aria-hidden="true" />
+            {profile.status} Based in Nashik, India.
           </p>
         </div>
 
@@ -70,100 +68,21 @@ export function Hero({ photo }: { photo: string | null }) {
   );
 }
 
-export function About() {
-  return (
-    <section id="about" tabIndex={-1} aria-labelledby="about-title" className={sectionBase}>
-      <div className="mx-auto grid max-w-site grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-20">
-        <div className="lg:col-span-4" data-reveal>
-          <p className="label">01 - About</p>
-          <p className="text-display mt-6 text-3xl leading-tight text-paper md:text-4xl">{profile.name}</p>
-          <p className="text-mono mt-2 text-xs tracking-widest text-muted uppercase">{profile.role}</p>
-          <h2 id="about-title" className="text-display mt-10 text-2xl leading-tight text-muted md:text-3xl">
-            {profile.aboutHeading}
-          </h2>
-        </div>
-        <div className="space-y-8 lg:col-span-8" data-reveal>
-          {profile.about.map((p) => (
-            <p key={p} className="text-xl leading-relaxed text-paper md:text-2xl">
-              {p}
-            </p>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+function AudienceTag({ children }: { children: string }) {
+  return <span className="pill">{children}</span>;
 }
 
-export function Capabilities() {
+export function Experience() {
   return (
-    <section id="skills" tabIndex={-1} aria-labelledby="skills-title" className={sectionBase}>
+    <section id="experience" tabIndex={-1} aria-labelledby="experience-title" className={sectionBase}>
       <div className="mx-auto max-w-site">
         <div data-reveal>
-          <p className="label">03 - Capabilities</p>
-          <h2 id="skills-title" className="text-display mt-4 mb-16 max-w-xl text-4xl text-paper md:text-5xl">
-            What I bring to a team
-          </h2>
-        </div>
-        <ul className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
-          {capabilities.map((c, i) => (
-            <li
-              key={c.title}
-              data-reveal
-              style={{ "--d": `${i * 90}ms` } as React.CSSProperties}
-              className="rounded-lg border border-line bg-surface/50 p-8 transition-colors hover:bg-surface"
-            >
-              <span className="text-mono text-[10px] tracking-widest text-accent uppercase">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="text-display mt-4 text-2xl text-paper">{c.title}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-muted">{c.description}</p>
-              <ul className="mt-6 flex flex-wrap gap-2" aria-label={`Tools for ${c.title}`}>
-                {c.items.map((item) => (
-                  <li key={item} className="pill">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-24 border-t border-line pt-16">
-          <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end" data-reveal>
-            <div>
-              <p className="label">Full toolkit</p>
-              <h3 className="text-display mt-3 text-2xl text-paper md:text-3xl">Technologies I work with</h3>
-            </div>
-            <p className="max-w-sm text-sm leading-relaxed text-muted">
-              Grouped by area. Most of these are in daily use on production client work.
-            </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="label">02 - Experience</p>
+            <AudienceTag>For hiring teams</AudienceTag>
           </div>
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:gap-12 lg:grid-cols-3">
-            {skills.map((group) => (
-              <div key={group.group} data-reveal>
-                <h4 className="text-mono mb-4 text-[10px] tracking-[0.25em] text-accent uppercase">{group.group}</h4>
-                <ul className="flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <li key={item} className="pill pill-tool">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function Journey() {
-  return (
-    <section id="journey" tabIndex={-1} aria-labelledby="journey-title" className={sectionBase}>
-      <div className="mx-auto max-w-site">
-        <div data-reveal>
-          <p className="label">04 - Journey</p>
-          <h2 id="journey-title" className="text-display mt-4 mb-16 text-4xl text-paper md:text-5xl">
-            Where I&apos;ve worked and studied
+          <h2 id="experience-title" className="text-display mt-4 mb-16 max-w-xl text-4xl text-paper md:text-5xl">
+            Experience
           </h2>
         </div>
         <ol className="flex flex-col border-t border-line">
@@ -193,6 +112,125 @@ export function Journey() {
             </li>
           ))}
         </ol>
+        <div data-reveal className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <a href={profile.resume} target="_blank" rel="noreferrer" className="btn-outline">
+            View resume
+          </a>
+          <a href={profile.linkedin} target="_blank" rel="noreferrer" className="link-underline text-mono text-xs tracking-widest text-paper uppercase transition-colors hover:text-accent">
+            LinkedIn
+          </a>
+        </div>
+
+        <div className="mt-24 border-t border-line pt-16">
+          <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end" data-reveal>
+            <h3 className="text-display text-3xl text-paper md:text-4xl">Technologies I work with</h3>
+            <p className="max-w-sm text-sm leading-relaxed text-muted">
+              Grouped by area. Most of these are in daily use on production client work.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:gap-12 lg:grid-cols-3">
+            {skills.map((group) => (
+              <div key={group.group} data-reveal>
+                <h4 className="text-mono mb-4 text-[10px] tracking-[0.25em] text-accent uppercase">{group.group}</h4>
+                <ul className="flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="pill pill-tool">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Services() {
+  return (
+    <section id="services" tabIndex={-1} aria-labelledby="services-title" className={sectionBase}>
+      <div className="mx-auto max-w-site">
+        <div data-reveal>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="label">03 - Services</p>
+            <AudienceTag>For businesses</AudienceTag>
+          </div>
+          <h2 id="services-title" className="text-display mt-4 mb-16 max-w-xl text-4xl text-paper md:text-5xl">
+            What I can build for you
+          </h2>
+        </div>
+        <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          {services.map((s, i) => (
+            <li
+              key={s.id}
+              data-reveal
+              style={{ "--d": `${(i % 3) * 90}ms` } as React.CSSProperties}
+              className="flex flex-col rounded-lg border border-line bg-surface/50 p-8 transition-colors hover:bg-surface"
+            >
+              <span className="text-mono text-[10px] tracking-widest text-accent uppercase">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="text-display mt-4 text-2xl text-paper">{s.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted">{s.description}</p>
+              <ul className="mt-6 flex flex-wrap gap-2" aria-label={`What you get with ${s.title}`}>
+                {s.deliverables.map((item) => (
+                  <li key={item} className="pill">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-xs leading-relaxed text-muted">{s.examples}</p>
+              <div className="mt-auto pt-8">
+                <ServiceButton id={s.id} title={s.title} />
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div id="process" tabIndex={-1} aria-labelledby="process-title" role="group" className="mt-24 scroll-mt-20 border-t border-line pt-16">
+          <p id="process-title" className="label mb-10" data-reveal>
+            How a project runs
+          </p>
+          <ol className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            {processSteps.map((step, i) => (
+              <li
+                key={step.title}
+                data-reveal
+                style={{ "--d": `${i * 90}ms` } as React.CSSProperties}
+                className="border-t border-line pt-6"
+              >
+                <p className="text-mono text-[10px] tracking-widest text-accent uppercase">Step {String(i + 1).padStart(2, "0")}</p>
+                <h4 className="text-display mt-4 text-2xl text-paper">{step.title}</h4>
+                <p className="mt-4 text-sm leading-relaxed text-muted">{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function About() {
+  return (
+    <section id="about" tabIndex={-1} aria-labelledby="about-title" className={sectionBase}>
+      <div className="mx-auto max-w-site">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-20">
+          <div className="lg:col-span-4" data-reveal>
+            <p className="label">04 - About</p>
+            <p className="text-display mt-6 text-3xl leading-tight text-paper md:text-4xl">{profile.name}</p>
+            <p className="text-mono mt-2 text-xs tracking-widest text-muted uppercase">{profile.role}</p>
+            <h2 id="about-title" className="text-display mt-10 text-2xl leading-tight text-muted md:text-3xl">
+              {profile.aboutHeading}
+            </h2>
+          </div>
+          <div className="space-y-8 lg:col-span-8" data-reveal>
+            {profile.about.map((p) => (
+              <p key={p} className="text-xl leading-relaxed text-paper md:text-2xl">
+                {p}
+              </p>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -210,30 +248,40 @@ export function Contact() {
         <div data-reveal>
           <p className="label">05 - Contact</p>
           <h2 id="contact-title" className="text-display mt-4 text-4xl leading-tight text-paper md:text-6xl">
-            Let&apos;s talk about your team
+            Let&apos;s talk
           </h2>
           <p className="mt-6 max-w-prose leading-relaxed text-muted">
-            I&apos;m open to full-time full stack roles. Tell me what you&apos;re building and where I&apos;d fit, and I&apos;ll get back to you.
+            Hiring for a role or need something built? Pick one and send a short note. I&apos;ll reply by email or WhatsApp.
           </p>
           <ul className="text-mono mt-12 flex flex-col gap-4 text-sm">
+            <li>
+              <a
+                href={whatsappLink(DEFAULT_WHATSAPP_TEXT)}
+                target="_blank"
+                rel="noreferrer"
+                className="link-underline text-paper transition-colors hover:text-accent"
+              >
+                WhatsApp {profile.whatsappDisplay}
+              </a>
+            </li>
             <li>
               <a href={`mailto:${profile.email}`} className="link-underline break-all text-paper transition-colors hover:text-accent">
                 {profile.email}
               </a>
             </li>
             <li>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="link-underline text-muted transition-colors hover:text-accent">
+              <a href={profile.linkedin} target="_blank" rel="noreferrer" className={contactLink}>
                 LinkedIn
               </a>
             </li>
             <li>
-              <a href={profile.github} target="_blank" rel="noreferrer" className="link-underline text-muted transition-colors hover:text-accent">
+              <a href={profile.github} target="_blank" rel="noreferrer" className={contactLink}>
                 GitHub
               </a>
             </li>
             <li>
-              <a href={profile.resume} target="_blank" rel="noreferrer" className="link-underline text-muted transition-colors hover:text-accent">
-                Resume (PDF)
+              <a href={profile.resume} target="_blank" rel="noreferrer" className={contactLink}>
+                Resume
               </a>
             </li>
           </ul>
@@ -250,7 +298,7 @@ export function Footer() {
   return (
     <footer className={`${pad} border-t border-line py-10`}>
       <div className="text-mono mx-auto flex max-w-site flex-col gap-4 text-[10px] tracking-[0.2em] text-muted uppercase md:flex-row md:items-center md:justify-between">
-        <p>{profile.name}, {profile.location}</p>
+        <p>{profile.name}, full stack developer, Nashik</p>
         <p className="normal-case tracking-wide">
           Press <kbd className="kbd">Ctrl K</kbd> to search, or open the terminal and type help.
         </p>

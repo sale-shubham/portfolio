@@ -21,21 +21,36 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const description =
-  "Shubham Sale is a full stack developer with 3+ years building enterprise web apps with React, Next.js, NestJS, Node.js and TypeScript.";
+  "Full stack developer in Nashik, India, with 3+ years building ERPs, SaaS products and dashboards in React, Next.js, Node.js and NestJS. Open to full-time roles and freelance projects.";
+const title = "Shubham Sale | Full Stack Developer";
 
 export const metadata: Metadata = {
-  title: "Shubham Sale | Full Stack Developer",
+  title,
   description,
   authors: [{ name: "Shubham Sale" }],
-  keywords: ["Shubham Sale", "full stack developer", "React", "Next.js", "NestJS", "Node.js", "TypeScript", "Nashik"],
+  keywords: [
+    "Shubham Sale",
+    "freelance developer",
+    "full stack developer",
+    "full stack developer jobs",
+    "hire full stack developer",
+    "full stack developer Nashik",
+    "ERP development",
+    "React",
+    "Next.js",
+    "NestJS",
+    "Node.js",
+    "TypeScript",
+    "Nashik",
+  ],
   openGraph: {
-    title: "Shubham Sale | Full Stack Developer",
+    title,
     description,
     type: "profile",
   },
   twitter: {
     card: "summary",
-    title: "Shubham Sale | Full Stack Developer",
+    title,
     description,
   },
 };
