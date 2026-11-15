@@ -3,7 +3,7 @@
 import { profile } from "@/data/profile";
 import { selectIntent } from "./contact-intent";
 
-const primary = "nav-pill border-accent/50 text-paper";
+const primary = "nav-pill border-accent/50 hover:border-accent";
 const secondary = "link-underline text-mono text-[11px] tracking-[0.2em] text-muted uppercase transition-colors hover:text-accent";
 
 /** The two hero paths. Both cards use the same link styles so neither dominates. */

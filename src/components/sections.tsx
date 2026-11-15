@@ -10,20 +10,20 @@ const contactLink = "link-underline text-muted transition-colors hover:text-acce
 
 export function Hero({ photo }: { photo: string | null }) {
   return (
-    <section id="top" tabIndex={-1} className={`relative flex min-h-svh flex-col justify-center overflow-hidden ${pad} py-28 md:py-32 lg:py-40`}>
+    <section id="top" tabIndex={-1} className={`relative flex min-h-svh flex-col justify-center overflow-hidden ${pad} pt-24 pb-16 md:py-32 lg:py-40`}>
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-accent/[0.06] via-ink to-ink" aria-hidden="true" />
-      <div className="relative mx-auto grid w-full max-w-site min-w-0 grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="order-2 min-w-0 lg:order-1 lg:col-span-7">
-          <p data-hero-animate style={{ "--i": 0 } as React.CSSProperties} className="label mb-6">
+      <div className="relative mx-auto grid w-full max-w-site min-w-0 grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-10 xl:gap-16">
+        <div className="order-2 min-w-0 lg:order-1 lg:col-span-8 xl:col-span-7">
+          <h1 data-hero-animate style={{ "--i": 0 } as React.CSSProperties} className="label mb-6">
             {profile.name} - {profile.role}
-          </p>
-          <h1
+          </h1>
+          <p
             data-hero-animate
             style={{ "--i": 1 } as React.CSSProperties}
             className="text-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.95] break-words text-paper"
           >
             {profile.tagline}
-          </h1>
+          </p>
           <p data-hero-animate style={{ "--i": 2 } as React.CSSProperties} className="mt-8 max-w-prose text-lg leading-relaxed text-muted md:text-xl">
             {profile.intro}
           </p>
@@ -36,16 +36,16 @@ export function Hero({ photo }: { photo: string | null }) {
           </p>
         </div>
 
-        <div data-hero-animate style={{ "--i": 2 } as React.CSSProperties} className="order-1 flex justify-center lg:order-2 lg:col-span-5 lg:justify-end">
+        <div data-hero-animate style={{ "--i": 2 } as React.CSSProperties} className="order-1 flex justify-center lg:order-2 lg:col-span-4 xl:col-span-5 lg:justify-end">
           <div className="group relative">
             <div className="absolute -inset-3 rotate-2 rounded-2xl border border-accent/20 transition-transform duration-500 group-hover:rotate-0" aria-hidden="true" />
-            <div className="relative aspect-[4/5] w-56 overflow-hidden rounded-2xl border border-line bg-surface sm:w-72 md:w-80">
+            <div className="relative aspect-[4/5] w-44 overflow-hidden rounded-2xl border border-line bg-surface sm:w-60 md:w-72 lg:w-60 xl:w-80">
               {photo ? (
                 <Image
                   src={photo}
                   alt={`Portrait of ${profile.name}`}
                   fill
-                  sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 224px"
+                  sizes="(min-width: 1280px) 320px, (min-width: 1024px) 240px, (min-width: 768px) 288px, (min-width: 640px) 240px, 176px"
                   className="object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                   priority
                 />
@@ -60,7 +60,7 @@ export function Hero({ photo }: { photo: string | null }) {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex" aria-hidden="true">
+      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex" aria-hidden="true">
         <span className="text-mono text-[10px] tracking-widest text-muted uppercase">Scroll</span>
         <span className="scroll-line block h-8 w-px bg-gradient-to-b from-muted to-transparent" />
       </div>
@@ -90,16 +90,16 @@ export function Experience() {
             <li
               key={item.id}
               data-reveal
-              className="group grid grid-cols-1 gap-4 border-b border-line py-10 md:grid-cols-12 md:gap-8"
+              className="group grid grid-cols-1 gap-4 border-b border-line py-10 lg:grid-cols-12 lg:gap-8"
             >
-              <div className="md:col-span-3">
+              <div className="lg:col-span-3">
                 <p className="text-mono text-[10px] tracking-widest text-muted uppercase">{item.period}</p>
               </div>
-              <div className="md:col-span-4">
+              <div className="lg:col-span-4">
                 <h3 className="text-display text-xl text-paper transition-colors group-hover:text-accent md:text-2xl">{item.title}</h3>
                 <p className="text-mono mt-1 text-xs tracking-wider text-muted uppercase">{item.org}</p>
               </div>
-              <div className="md:col-span-5">
+              <div className="max-w-prose lg:col-span-5 lg:max-w-none">
                 <p className="leading-relaxed text-muted">{item.summary}</p>
                 {item.points && (
                   <ul className="dash-list mt-5">
@@ -167,7 +167,7 @@ export function Services() {
               key={s.id}
               data-reveal
               style={{ "--d": `${(i % 3) * 90}ms` } as React.CSSProperties}
-              className="flex flex-col rounded-lg border border-line bg-surface/50 p-8 transition-colors hover:bg-surface"
+              className="flex flex-col rounded-lg border border-line bg-surface/50 p-6 transition-colors hover:bg-surface sm:p-8"
             >
               <span className="text-mono text-[10px] tracking-widest text-accent uppercase">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="text-display mt-4 text-2xl text-paper">{s.title}</h3>
@@ -214,7 +214,7 @@ export function About() {
   return (
     <section id="about" tabIndex={-1} aria-labelledby="about-title" className={sectionBase}>
       <div className="mx-auto max-w-site">
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-20">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-12 xl:gap-20">
           <div className="lg:col-span-4" data-reveal>
             <p className="label">04 - About</p>
             <p className="text-display mt-6 text-3xl leading-tight text-paper md:text-4xl">{profile.name}</p>
@@ -296,10 +296,10 @@ export function Contact() {
 
 export function Footer() {
   return (
-    <footer className={`${pad} border-t border-line py-10`}>
-      <div className="text-mono mx-auto flex max-w-site flex-col gap-4 text-[10px] tracking-[0.2em] text-muted uppercase md:flex-row md:items-center md:justify-between">
+    <footer className={`${pad} border-t border-line pt-10 pb-24 md:pb-10`}>
+      <div className="text-mono mx-auto flex max-w-site flex-col gap-4 text-[10px] tracking-[0.2em] text-muted uppercase lg:flex-row lg:items-center lg:justify-between">
         <p>{profile.name}, full stack developer, Nashik</p>
-        <p className="normal-case tracking-wide">
+        <p className="hidden normal-case tracking-wide lg:block">
           Press <kbd className="kbd">Ctrl K</kbd> to search, or open the terminal and type help.
         </p>
         <a href="#top" className="link-underline w-fit transition-colors hover:text-accent">

@@ -198,15 +198,15 @@ export function ContactForm() {
         e.preventDefault();
         send("whatsapp");
       }}
-      className="flex flex-col gap-6 rounded-lg border border-line bg-surface/30 p-6 sm:p-8"
+      className="flex flex-col gap-6 rounded-lg border border-line bg-surface/30 p-5 sm:p-8"
     >
       <fieldset className="min-w-0">
         <legend className={`${labelClass} mb-2`}>What&apos;s this about?</legend>
-        <div className="grid grid-cols-2 gap-1 rounded-full border border-line-strong p-1">
+        <div className="grid grid-cols-2 gap-1 rounded-2xl border border-line-strong p-1 sm:rounded-full">
           {INTENTS.map((option) => (
             <label
               key={option.value}
-              className="text-mono relative cursor-pointer rounded-full px-3 py-2.5 text-center text-[11px] tracking-widest text-muted uppercase transition-colors has-[:checked]:bg-accent has-[:checked]:text-ink has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent"
+              className="text-mono relative cursor-pointer rounded-xl px-2 py-2.5 text-center text-[10px] leading-tight tracking-wide sm:rounded-full sm:px-3 sm:text-[11px] sm:tracking-widest text-muted uppercase transition-colors has-[:checked]:bg-accent has-[:checked]:text-ink has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent"
             >
               <input
                 type="radio"
@@ -248,10 +248,10 @@ export function ContactForm() {
       )}
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap gap-3">
-          <button type="submit" className="btn-accent">
+          <button type="submit" className="btn-accent w-full justify-center sm:w-auto">
             Send on WhatsApp
           </button>
-          <button type="button" onClick={() => send("email")} className="btn-outline">
+          <button type="button" onClick={() => send("email")} className="btn-outline w-full justify-center sm:w-auto">
             Send by email
           </button>
         </div>

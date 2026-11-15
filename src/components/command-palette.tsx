@@ -186,7 +186,7 @@ export function CommandPalette({ onClose, onOpenTerminal, onOpenProject, onNotif
   }
 
   return (
-    <div className="fixed inset-0 z-[300] flex items-start justify-center px-4 pt-[12vh]" role="presentation">
+    <div className="fixed inset-0 z-[300] flex items-start justify-center px-4 pt-4 sm:pt-[12vh]" role="presentation">
       <div className="overlay-backdrop absolute inset-0" onClick={onClose} aria-hidden="true" />
       <div
         ref={panelRef}
@@ -210,12 +210,21 @@ export function CommandPalette({ onClose, onOpenTerminal, onOpenProject, onNotif
             aria-controls={listId}
             aria-activedescendant={results[activeIndex] ? `${listId}-${results[activeIndex].id}` : undefined}
             aria-label="Search sections, services, projects and actions"
-            placeholder="Search sections, services, projects and actions"
+            placeholder="Search the site"
             className="h-14 w-full bg-transparent text-[16px] text-paper placeholder:text-muted focus:outline-none"
             autoComplete="off"
             spellCheck={false}
           />
-          <kbd className="kbd">Esc</kbd>
+          <span className="hidden sm:inline-flex">
+            <kbd className="kbd">Esc</kbd>
+          </span>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-mono -mr-2 min-h-10 shrink-0 px-3 text-[11px] tracking-widest text-muted uppercase transition-colors hover:text-paper sm:hidden"
+          >
+            Close
+          </button>
         </div>
 
         <ul id={listId} role="listbox" aria-label="Commands" className="max-h-[min(420px,60vh)] overflow-y-auto p-2">
@@ -253,7 +262,7 @@ export function CommandPalette({ onClose, onOpenTerminal, onOpenProject, onNotif
           })}
         </ul>
 
-        <div className="text-mono flex gap-5 border-t border-line px-5 py-3 text-[11px] text-muted">
+        <div className="text-mono hidden gap-5 border-t border-line px-5 py-3 text-[11px] text-muted sm:flex">
           <span>
             <kbd className="kbd">↑</kbd> <kbd className="kbd">↓</kbd> move
           </span>

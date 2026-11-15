@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shubham Sale — Portfolio
 
-## Getting Started
+Portfolio site of Shubham Sale, a full stack developer in Nashik, India. Live at [https://shubsale.in](https://shubsale.in).
 
-First, run the development server:
+![Shubham Sale portfolio](src/app/opengraph-image.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## About
+
+Shubham is a full stack developer in Nashik, Maharashtra, with 3+ years of experience building ERPs, SaaS products and dashboards. Open to full-time roles and freelance projects.
+
+## Features
+
+- Case studies with flow diagrams
+- Ctrl/⌘+K command menu
+- Terminal mode
+- WhatsApp and email enquiry form, with a job or project intent
+- Responsive layout
+- Accessible markup and keyboard navigation
+- SEO metadata and JSON-LD structured data
+
+## Tech stack
+
+- Next.js 16 (App Router, static export)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- AWS Amplify Hosting
+- Amazon Route 53
+
+## Project structure
+
+```
+src/
+  app/              layout, page, metadata files (robots, sitemap, manifest, icons, OG image)
+  components/       page sections, command menu, terminal, contact form
+  data/profile.ts   single source of content for the page, command menu and terminal
+public/             profile photo
+amplify.yml         Amplify build settings
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm ci
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The dev server runs at http://localhost:3000. `npm run build` outputs the static site to `out/`.
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+Pushing to `main` triggers an AWS Amplify build that follows `amplify.yml` and publishes the `out/` folder.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Client work
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The client projects shown on the site were built at AI Alpha Tech Pvt. Ltd. Their code is private and is not part of this repository.
 
-## Deploy on Vercel
+## Contact
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Website: [shubsale.in](https://shubsale.in)
+- LinkedIn: [shubham-sale28](https://www.linkedin.com/in/shubham-sale28)
+- GitHub: [sale-shubham](https://github.com/sale-shubham)
+- Email: [saleshubham2121@gmail.com](mailto:saleshubham2121@gmail.com)

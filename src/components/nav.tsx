@@ -81,7 +81,7 @@ export function Nav() {
             <span className="sm:hidden">{profile.initials}</span>
             <span className="hidden sm:inline">{profile.name}</span>
           </a>
-          <nav aria-label="Sections" className="hidden items-center gap-8 md:flex">
+          <nav aria-label="Sections" className="hidden items-center gap-8 xl:flex">
             {sections.map((s) => (
               <a
                 key={s.id}
@@ -99,12 +99,13 @@ export function Nav() {
             <button
               type="button"
               onClick={openPalette}
-              aria-label="Search the site"
+              aria-label="Menu and search"
               aria-keyshortcuts="Control+K Meta+K"
               className="nav-pill"
             >
               <SearchIcon width={13} height={13} />
-              <span className="hidden lg:inline">{mod} K</span>
+              <span className="xl:hidden">Menu</span>
+              <span className="hidden xl:inline">{mod} K</span>
             </button>
             <button type="button" onClick={openTerminal} aria-label="Open terminal mode" className="nav-pill hidden sm:inline-flex">
               <TerminalIcon width={13} height={13} />
@@ -112,10 +113,10 @@ export function Nav() {
             <a href={profile.resume} target="_blank" rel="noreferrer" className="nav-pill hidden sm:inline-flex">
               Resume
             </a>
-            <button type="button" onClick={() => selectIntent("project")} className="nav-pill hidden border-accent/50 text-paper sm:inline-flex">
+            <button type="button" onClick={() => selectIntent("project")} className="nav-pill hidden border-accent/50 hover:border-accent sm:inline-flex">
               Start a project
             </button>
-            <a href="#contact" className="nav-pill border-accent/50 text-paper sm:hidden">
+            <a href="#contact" className="nav-pill border-accent/50 hover:border-accent sm:hidden">
               Contact
             </a>
           </div>

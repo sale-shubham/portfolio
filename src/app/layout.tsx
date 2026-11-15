@@ -21,35 +21,54 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const description =
-  "Full stack developer in Nashik, India, with 3+ years building ERPs, SaaS products and dashboards in React, Next.js, Node.js and NestJS. Open to full-time roles and freelance projects.";
-const title = "Shubham Sale | Full Stack Developer";
+  "Shubham Sale, full stack developer in Nashik, India. 3+ years building ERPs, SaaS and dashboards in React, Next.js, Node.js, NestJS. Open to jobs and freelance.";
+const title = "Shubham Sale | Full Stack Developer in Nashik, India";
+const siteUrl = "https://shubsale.in";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title,
   description,
-  authors: [{ name: "Shubham Sale" }],
+  applicationName: "Shubham Sale",
+  authors: [{ name: "Shubham Sale", url: siteUrl }],
+  creator: "Shubham Sale",
+  category: "technology",
   keywords: [
     "Shubham Sale",
-    "freelance developer",
-    "full stack developer",
-    "full stack developer jobs",
-    "hire full stack developer",
     "full stack developer Nashik",
-    "ERP development",
-    "React",
-    "Next.js",
+    "hire full stack developer",
+    "freelance web developer India",
+    "React developer",
+    "Next.js developer",
+    "Node.js developer",
     "NestJS",
-    "Node.js",
+    "ERP development",
     "TypeScript",
-    "Nashik",
   ],
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  formatDetection: { telephone: false },
   openGraph: {
+    type: "profile",
+    url: "/",
+    siteName: "Shubham Sale",
+    locale: "en_IN",
     title,
     description,
-    type: "profile",
+    firstName: "Shubham",
+    lastName: "Sale",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title,
     description,
   },

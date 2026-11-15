@@ -448,7 +448,7 @@ export function Terminal({ onClose, onOpenProject }: Props) {
               value={value}
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={onKeyDown}
-              className="term-input min-w-0 flex-1 bg-transparent focus:outline-none"
+              className="term-input min-w-0 flex-1 bg-transparent text-[16px] focus:outline-none sm:text-[14px]"
               autoComplete="off"
               autoCapitalize="off"
               autoCorrect="off"

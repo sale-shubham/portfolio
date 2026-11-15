@@ -58,7 +58,7 @@ export function Intro({ photo }: { photo: string | null }) {
       aria-hidden="true"
     >
       <div className={`flex flex-col items-center transition-all duration-700 ${leaving ? "scale-95 opacity-0" : "intro-in"}`}>
-        <div className="relative mb-8 flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-accent/40 bg-surface ring-4 ring-accent/10 md:h-36 md:w-36">
+        <div className="relative mb-8 flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-accent/40 bg-surface ring-4 ring-accent/10 md:h-36 md:w-36 [@media(max-height:520px)]:h-20 [@media(max-height:520px)]:w-20">
           {photo ? (
             <Image src={photo} alt="" fill sizes="144px" className="object-cover" priority />
           ) : (
@@ -68,7 +68,7 @@ export function Intro({ photo }: { photo: string | null }) {
         <p className="text-mono mb-4 text-center text-[10px] tracking-[0.4em] text-muted uppercase">Portfolio</p>
         <p className="text-display text-center text-4xl text-paper md:text-6xl lg:text-7xl">{profile.name}</p>
         <p className="text-mono mt-3 text-center text-xs tracking-widest text-muted uppercase">{profile.role}</p>
-        <p className="mt-6 max-w-md text-center text-sm leading-relaxed text-muted md:text-base">{profile.intro}</p>
+        <p className="mt-6 max-w-md text-center text-sm leading-relaxed text-muted md:text-base [@media(max-height:520px)]:hidden">{profile.intro}</p>
       </div>
       <button
         type="button"

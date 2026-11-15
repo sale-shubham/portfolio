@@ -17,17 +17,47 @@ function findPhoto(): string | null {
   return name ? `/${name}` : null;
 }
 
-const jsonLd = {
-  "@context": "https://schema.org",
+const SITE = "https://shubsale.in";
+const pageTitle = "Shubham Sale | Full Stack Developer in Nashik, India";
+
+const person = {
   "@type": "Person",
+  "@id": `${SITE}/#person`,
   name: profile.name,
+  url: SITE,
+  image: `${SITE}/profile.webp`,
   jobTitle: "Full Stack Developer",
+  description:
+    "Full stack developer in Nashik, India, building ERPs, SaaS products and dashboards with React, Next.js, Node.js and NestJS.",
   email: `mailto:${profile.email}`,
   telephone: `+${profile.whatsapp}`,
   address: { "@type": "PostalAddress", addressLocality: "Nashik", addressRegion: "Maharashtra", addressCountry: "IN" },
   worksFor: { "@type": "Organization", name: "AI Alpha Tech Pvt. Ltd." },
   sameAs: [profile.github, profile.linkedin],
   knowsAbout: skills.flatMap((s) => s.items).slice(0, 20),
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: "Shubham Sale",
+      inLanguage: "en-IN",
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE}/#profilepage`,
+      url: SITE,
+      name: pageTitle,
+      isPartOf: { "@id": `${SITE}/#website` },
+      about: { "@id": `${SITE}/#person` },
+      mainEntity: { "@id": `${SITE}/#person` },
+    },
+    person,
+  ],
 };
 
 export default function Home() {

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { profile, projects, type Project } from "@/data/profile";
-import { useIsDesktop, useReducedMotion } from "@/lib/hooks";
+import { useWideLayout, useReducedMotion } from "@/lib/hooks";
 import { selectIntent } from "./contact-intent";
 import { FlowSvg } from "./flow-diagram";
 import { useUI } from "./ui-provider";
@@ -11,7 +11,7 @@ function CardText({ project, onOpen }: { project: Project; onOpen: () => void })
   return (
     <>
       <p className="text-mono text-[10px] tracking-widest text-accent uppercase">{project.client}</p>
-      <h3 className="text-display mt-2 text-2xl leading-tight break-words text-paper transition-colors group-hover:text-accent md:text-4xl">
+      <h3 className="text-display mt-2 text-2xl leading-tight break-words text-paper transition-colors group-hover:text-accent md:text-3xl xl:text-4xl">
         <button
           type="button"
           onClick={onOpen}
@@ -95,7 +95,7 @@ export function Work() {
   const trackRef = useRef<HTMLDivElement>(null);
   const distanceRef = useRef(0);
   const reduced = useReducedMotion();
-  const desktop = useIsDesktop();
+  const desktop = useWideLayout();
   const { openProject } = useUI();
   const pinned = desktop && !reduced;
 
@@ -172,7 +172,7 @@ export function Work() {
             </p>
           </div>
         </div>
-        <div className="work-scroller hidden md:block">
+        <div className="work-scroller hidden wide:block">
           <div
             ref={trackRef}
             onFocus={onTrackFocus}
@@ -186,7 +186,7 @@ export function Work() {
         </div>
       </div>
 
-      <div className="flex max-w-full flex-col gap-6 px-6 pb-24 md:hidden">
+      <div className="mx-auto grid max-w-site gap-6 px-6 pb-24 sm:grid-cols-2 md:px-12 lg:grid-cols-3 lg:px-20 wide:hidden">
         {projects.map((project) => (
           <NarrowCard key={project.slug} project={project} onOpen={() => openProject(project.slug)} />
         ))}

@@ -20,10 +20,10 @@ export function useReducedMotion() {
   return useSyncExternalStore(reducedMotion.subscribe, reducedMotion.get, reducedMotion.server);
 }
 
-const desktop = mediaStore("(min-width: 768px)", true);
+const wideLayout = mediaStore("(min-width: 1024px) and (min-height: 600px)", true);
 
-export function useIsDesktop() {
-  return useSyncExternalStore(desktop.subscribe, desktop.get, desktop.server);
+export function useWideLayout() {
+  return useSyncExternalStore(wideLayout.subscribe, wideLayout.get, wideLayout.server);
 }
 
 const noop = () => () => {};
